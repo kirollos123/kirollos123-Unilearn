@@ -10,16 +10,18 @@
 
 A full-featured **University Management System** built with ASP.NET Core MVC — inspired by Udemy's UI design. Manage Departments, Instructors, Courses, Trainees, and Student Enrollments with role-based access control.
 
+
 </div>
 
 ---
 
 ## 📸 Screenshots
 
-| Home Page | Instructors | Departments |
-|-----------|-------------|-------------|
-| Hero banner + stat cards | Searchable table + avatars | Detail with nested lists |
+## 📸 Screenshots
 
+| Home | Instructors | Departments |
+|------|-------------|-------------|
+| ![Home](docs/images/home.png) | ![Instructors](docs/images/instructors.png) | ![Departments](docs/images/departments.png) |
 ---
 
 ## ✨ Features
