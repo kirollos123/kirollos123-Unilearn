@@ -1,0 +1,17 @@
+@model UniversityApp_1.Models.Department
+@{
+    ViewData["Title"] = "Department Details";
+}
+
+<div class="container mt-4">
+    <h2>@Model.Name</h2>
+    <p><strong>Manager:</strong> @Model.Manager</p>
+    <hr />
+    <h5>Courses (@Model.Courses.Count)</h5>
+    <ul>@foreach (var c in Model.Courses) { <li>@c.Name</li> }</ul>
+    <h5>Instructors (@Model.Instructors.Count)</h5>
+    <ul>@foreach (var i in Model.Instructors) { <li>@i.Name</li> }</ul>
+    <h5>Trainees (@Model.Trainees.Count)</h5>
+    <ul>@foreach (var t in Model.Trainees) { <li>@t.Name</li> }</ul>
+    <a asp-action="Index" class="btn btn-secondary mt-3">Back</a>
+</div>

@@ -1,0 +1,59 @@
+@model IEnumerable<UniversityApp_1.Models.Enrollment>
+@{ViewData["Title"] = "My Courses";}
+
+<div class="page-header">
+  <div class="container">
+    <h2><i class="fas fa-graduation-cap me-2" style="color:var(--accent)"></i>My Courses</h2>
+    <p class="text-muted mb-0">@Model.Count() course(s) enrolled</p>
+  </div>
+</div>
+
+<div class="container pb-5">
+  @if (TempData["Success"] != null)
+  {
+    <div class="alert alert-success">@TempData["Success"]</div>
+  }
+
+  @if (!Model.Any())
+  {
+    <div class="text-center py-5">
+      <i class="fas fa-book-open fa-3x mb-3 text-muted"></i>
+      <h5 class="text-muted">You haven't enrolled in any courses yet.</h5>
+      <a href="/Course" class="btn btn-primary-udemy mt-3">Browse Courses</a>
+    </div>
+  }
+  else
+  {
+    <div class="row g-4">
+      @foreach (var e in Model)
+      {
+        <div class="col-md-4 col-lg-3">
+          <div class="card-udemy">
+            <div class="card-img-placeholder" style="background:linear-gradient(135deg,#a435f0,#6366f1)">
+              <i class="fas fa-book-open"></i>
+            </div>
+            <div class="card-body">
+              <div class="card-title">@e.Course?.Name</div>
+              <p class="instructor-name"><i class="fas fa-building me-1"></i>@(e.Course?.Department?.Name ?? "—")</p>
+              <p class="instructor-name"><i class="fas fa-clock me-1"></i>@e.Course?.Hours hrs &nbsp;|&nbsp; Enrolled @e.EnrolledAt.ToString("MMM dd, yyyy")</p>
+              @if (e.Grade.HasValue)
+              {
+                <div class="mt-2">
+                  <span class="badge-dept"><i class="fas fa-star me-1"></i>Grade: @e.Grade</span>
+                </div>
+              }
+              <div class="d-flex gap-1 mt-3">
+                <a href="/Course/Detail/@e.CourseId" class="btn-view flex-fill text-center py-1">View</a>
+                <form asp-controller="Enrollment" asp-action="Unenroll" method="post" class="flex-fill">
+                  <input type="hidden" name="courseId" value="@e.CourseId" />
+                  <button type="submit" class="btn-del w-100 py-1"
+                    onclick="return confirm('Unenroll from this course?')">Unenroll</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

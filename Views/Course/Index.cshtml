@@ -1,0 +1,43 @@
+@model IEnumerable<UniversityApp_1.Models.Course>
+@{ViewData["Title"] = "Courses";}
+<div class="page-header">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+      <h2><i class="fas fa-book me-2" style="color:var(--accent)"></i>Courses</h2>
+      @if (User.IsInRole("Admin")) {
+        <a href="/Course/Create" class="btn btn-primary-udemy"><i class="fas fa-plus me-1"></i>Add</a>
+      }
+    </div>
+  </div>
+</div>
+<div class="container pb-5">
+  <div class="row g-4">
+    @foreach (var c in Model) {
+      <div class="col-md-4 col-lg-3">
+        <div class="card-udemy">
+          <div class="card-img-placeholder" style="background:linear-gradient(135deg,#0ea5e9,#6366f1)">
+            <i class="fas fa-book-open"></i>
+          </div>
+          <div class="card-body">
+            <div class="card-title">@c.Name</div>
+            <p class="instructor-name"><i class="fas fa-building me-1"></i>@(c.Department?.Name ?? "none")</p>
+            <div class="d-flex justify-content-between align-items-center mt-2">
+              <span class="badge-course">@c.Hours hrs</span>
+              <span class="price">@c.Degree pts</span>
+            </div>
+            <div class="d-flex gap-1 mt-3">
+              <a href="/Course/Detail/@c.Id" class="btn-view flex-fill text-center py-1">View</a>
+              @if (User.IsInRole("Admin")) {
+                <a href="/Course/Edit/@c.Id" class="btn-edit flex-fill text-center py-1">Edit</a>
+                <a href="/Course/Delete/@c.Id" class="btn-del flex-fill text-center py-1">Del</a>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+    @if (!Model.Any()) {
+      <div class="col-12 text-center py-5 text-muted">No courses found.</div>
+    }
+  </div>
+</div>

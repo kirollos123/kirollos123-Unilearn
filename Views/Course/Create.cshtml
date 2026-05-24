@@ -1,0 +1,21 @@
+@model UniversityApp_1.Models.Course
+@{ViewData["Title"] = "Add Course";}
+<div class="page-header"><div class="container"><h2>Add Course</h2></div></div>
+<div class="container pb-5"><div class="row"><div class="col-md-6"><div class="form-card">
+  <form method="post">
+    @Html.AntiForgeryToken()
+    <div class="mb-3"><label class="form-label">Course Name</label><input asp-for="Name" class="form-control" /></div>
+    <div class="row">
+      <div class="col"><div class="mb-3"><label class="form-label">Max Degree</label><input asp-for="Degree" class="form-control" type="number" step="0.01" /></div></div>
+      <div class="col"><div class="mb-3"><label class="form-label">Min Degree</label><input asp-for="MinDegree" class="form-control" type="number" step="0.01" /></div></div>
+    </div>
+    <div class="mb-3"><label class="form-label">Hours</label><input asp-for="Hours" class="form-control" type="number" /></div>
+    <div class="mb-3"><label class="form-label">Department</label>
+      @Html.DropDownList("DeptId", ViewBag.Departments as SelectList, "-- Select --", new { @class = "form-select" })
+    </div>
+    <div class="d-flex gap-2">
+      <button type="submit" class="btn btn-primary-udemy px-4">Save</button>
+      <a href="/Course" class="btn btn-light px-4">Cancel</a>
+    </div>
+  </form>
+</div></div></div></div>

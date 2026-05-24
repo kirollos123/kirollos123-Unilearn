@@ -1,0 +1,15 @@
+@model UniversityApp_1.Models.Trainee
+@{ViewData["Title"] = "Delete";}
+<div class="container py-5"><div class="row justify-content-center"><div class="col-md-5">
+  <div class="form-card text-center">
+    <h4>Delete <strong>@Model.Name</strong>?</h4>
+    <p class="text-muted">This cannot be undone.</p>
+    <form method="post">
+      @Html.AntiForgeryToken()
+      <div class="d-flex gap-2 justify-content-center mt-3">
+        <button type="submit" class="btn btn-danger px-4">Delete</button>
+        <a href="/Trainee" class="btn btn-light px-4">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div></div></div>

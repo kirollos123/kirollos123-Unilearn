@@ -1,0 +1,75 @@
+@model UniversityApp_1.Controllers.AdminDashboardViewModel
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">🛠️ Admin Dashboard</h2>
+
+    <div class="row g-3 mb-4">
+        <div class="col-md-2">
+            <div class="card text-white bg-primary text-center p-3">
+                <h3>@Model.TotalUsers</h3>
+                <p class="mb-0">Users</p>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card text-white bg-success text-center p-3">
+                <h3>@Model.TotalDepartments</h3>
+                <p class="mb-0">Departments</p>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card text-white bg-warning text-center p-3">
+                <h3>@Model.TotalCourses</h3>
+                <p class="mb-0">Courses</p>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card text-white bg-info text-center p-3">
+                <h3>@Model.TotalInstructors</h3>
+                <p class="mb-0">Instructors</p>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card text-white bg-secondary text-center p-3">
+                <h3>@Model.TotalTrainees</h3>
+                <p class="mb-0">Trainees</p>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card text-white bg-dark text-center p-3">
+                <h3>@Model.TotalRoles</h3>
+                <p class="mb-0">Roles</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-3">
+        <div class="col-md-4">
+            <a asp-action="Users" class="btn btn-outline-primary w-100 py-3">👥 Manage Users</a>
+        </div>
+        <div class="col-md-4">
+            <a asp-action="Roles" class="btn btn-outline-dark w-100 py-3">🔑 Manage Roles</a>
+        </div>
+        <div class="col-md-4">
+            <a asp-controller="Department" asp-action="Index" class="btn btn-outline-success w-100 py-3">🏫 Departments</a>
+        </div>
+    </div>
+
+    <h5 class="mt-5">Recent Users</h5>
+    <table class="table table-bordered mt-2">
+        <thead class="table-dark">
+            <tr><th>Full Name</th><th>Email</th></tr>
+        </thead>
+        <tbody>
+            @foreach (var u in Model.RecentUsers)
+            {
+                <tr>
+                    <td>@u.FullName</td>
+                    <td>@u.Email</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

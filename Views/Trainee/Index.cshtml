@@ -1,0 +1,59 @@
+@model IEnumerable<UniversityApp_1.Models.Trainee>
+@{ViewData["Title"] = "Trainees";}
+
+@if (!User.IsInRole("Admin"))
+{
+    <div class="container py-5 text-center">
+        <i class="fas fa-lock fa-3x mb-3 text-muted"></i>
+        <h4 class="text-muted">Access Denied</h4>
+        <p class="text-muted">You don't have permission to view this page.</p>
+        <a href="/" class="btn btn-primary-udemy">Go Home</a>
+    </div>
+    return;
+}
+
+<div class="page-header">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+      <h2><i class="fas fa-user-graduate me-2" style="color:var(--accent)"></i>Trainees</h2>
+      <a href="/Trainee/Create" class="btn btn-primary-udemy"><i class="fas fa-plus me-1"></i>Add</a>
+    </div>
+  </div>
+</div>
+<div class="container pb-5">
+  <div class="table-udemy">
+    <table class="table table-hover mb-0">
+      <thead><tr><th>#</th><th>Trainee</th><th>Grade</th><th>Department</th><th>Actions</th></tr></thead>
+      <tbody>
+        @foreach (var t in Model) {
+          <tr>
+            <td class="text-muted">@t.Id</td>
+            <td>
+              <div class="d-flex align-items-center gap-2">
+                @if (!string.IsNullOrEmpty(t.Image)) {
+                  <img src="@t.Image" class="avatar-img" />
+                } else {
+                  <div class="avatar-circle" style="background:linear-gradient(135deg,var(--gold),#f97316)">@t.Name[0]</div>
+                }
+                <div>
+                  <div class="fw-semibold">@t.Name</div>
+                  <small class="text-muted">@t.Address</small>
+                </div>
+              </div>
+            </td>
+            <td><span class="badge-dept">@(t.Grade ?? "none")</span></td>
+            <td>@(t.Department?.Name ?? "none")</td>
+            <td>
+              <a href="/Trainee/Detail/@t.Id" class="btn-view me-1"><i class="fas fa-eye"></i></a>
+              <a href="/Trainee/Edit/@t.Id" class="btn-edit me-1"><i class="fas fa-edit"></i></a>
+              <a href="/Trainee/Delete/@t.Id" class="btn-del"><i class="fas fa-trash"></i></a>
+            </td>
+          </tr>
+        }
+        @if (!Model.Any()) {
+          <tr><td colspan="5" class="text-center py-5 text-muted">No trainees found.</td></tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

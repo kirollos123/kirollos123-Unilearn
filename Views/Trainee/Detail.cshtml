@@ -1,0 +1,39 @@
+@model UniversityApp_1.Models.Trainee
+@{ViewData["Title"] = Model.Name;}
+<div class="container py-4">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb breadcrumb-udemy">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-item"><a href="/Trainee">Trainees</a></li>
+      <li class="breadcrumb-item active">@Model.Name</li>
+    </ol>
+  </nav>
+  <div class="detail-header mt-3">
+    <div class="d-flex align-items-center gap-4">
+      @if (!string.IsNullOrEmpty(Model.Image)) {
+        <img src="@Model.Image" class="detail-avatar" />
+      } else {
+        <div class="detail-avatar-placeholder">@Model.Name[0]</div>
+      }
+      <div>
+        <h2 class="fw-800 mb-1">@Model.Name</h2>
+        <div class="info-row"><i class="fas fa-building"></i><span>@(Model.Department?.Name ?? "none")</span></div>
+        <div class="info-row"><i class="fas fa-map-marker-alt"></i><span>@(Model.Address ?? "none")</span></div>
+        <div class="info-row"><i class="fas fa-graduation-cap"></i><span>Grade: @(Model.Grade ?? "none")</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="form-card mt-3">
+    <h6 class="fw-bold mb-3">Course Results</h6>
+    @foreach (var r in Model.CrsResults) {
+      <div class="d-flex justify-content-between mb-2">
+        <span>@(r.Course?.Name ?? "?")</span>
+        <span class="badge-dept">@r.Degree</span>
+      </div>
+    }
+    @if (!Model.CrsResults.Any()) {
+      <p class="text-muted">No results yet.</p>
+    }
+  </div>
+  <a href="/Trainee" class="btn btn-primary-udemy mt-3"><i class="fas fa-arrow-left me-2"></i>Back to Trainees</a>
+</div>

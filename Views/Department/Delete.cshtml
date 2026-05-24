@@ -1,0 +1,14 @@
+@model UniversityApp_1.Models.Department
+@{
+    ViewData["Title"] = "Delete Department";
+}
+
+<div class="container mt-4" style="max-width:500px">
+    <h2 class="text-danger">Delete Department</h2>
+    <p>Are you sure you want to delete <strong>@Model.Name</strong>?</p>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">Yes, Delete</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>

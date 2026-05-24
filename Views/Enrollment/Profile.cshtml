@@ -1,0 +1,62 @@
+@{
+    ViewData["Title"] = "My Profile";
+    var user = ViewBag.User as UniversityApp_1.Models.ApplicationUser;
+    var enrollments = ViewBag.Enrollments as IEnumerable<UniversityApp_1.Models.Enrollment>;
+}
+
+<div class="container py-5" style="max-width:700px">
+  <div class="detail-header">
+    <div class="d-flex align-items-center gap-4">
+      <div class="detail-avatar-placeholder">
+        <i class="fas fa-user"></i>
+      </div>
+      <div>
+        <h3 class="mb-1">@user?.FullName</h3>
+        <div class="info-row"><i class="fas fa-envelope"></i> @user?.Email</div>
+        <div class="info-row"><i class="fas fa-graduation-cap"></i> @ViewBag.TotalCourses course(s) enrolled</div>
+        @if (User.IsInRole("Admin"))
+        {
+          <span class="badge bg-warning text-dark mt-1"><i class="fas fa-crown me-1"></i>Admin</span>
+        }
+        else
+        {
+          <span class="badge bg-primary mt-1"><i class="fas fa-user me-1"></i>Student</span>
+        }
+      </div>
+    </div>
+  </div>
+
+  <h5 class="mb-3">Enrolled Courses</h5>
+  @if (enrollments == null || !enrollments.Any())
+  {
+    <p class="text-muted">No courses enrolled yet. <a href="/Course">Browse courses →</a></p>
+  }
+  else
+  {
+    <div class="table-udemy">
+      <table class="table table-hover mb-0">
+        <thead><tr><th>Course</th><th>Department</th><th>Enrolled</th><th>Grade</th></tr></thead>
+        <tbody>
+          @foreach (var e in enrollments!)
+          {
+            <tr>
+              <td><a href="/Course/Detail/@e.CourseId" class="text-decoration-none fw-semibold">@e.Course?.Name</a></td>
+              <td><span class="badge-dept">@(e.Course?.Department?.Name ?? "—")</span></td>
+              <td class="text-muted">@e.EnrolledAt.ToString("MMM dd, yyyy")</td>
+              <td>
+                @if (e.Grade.HasValue)
+                {<span class="badge-course">@e.Grade</span>}
+                else
+                {<span class="text-muted">—</span>}
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  <div class="mt-4">
+    <a href="/Enrollment/MyCourses" class="btn btn-primary-udemy me-2">My Courses</a>
+    <a href="/Course" class="btn btn-outline-secondary">Browse More Courses</a>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+@model UniversityApp_1.Models.Department
+@{
+    ViewData["Title"] = "Create Department";
+}
+
+<div class="container mt-4" style="max-width:500px">
+    <h2>Create Department</h2>
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Manager" class="form-label"></label>
+            <input asp-for="Manager" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-success">Create</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
